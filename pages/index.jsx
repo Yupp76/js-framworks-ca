@@ -3,6 +3,7 @@ import Heading from "../components/Heading";
 import Link from "next/link";
 import { loadPosts } from "../lib/fetch";
 import PageCard from "../components/PostCard";
+import { posts } from "../constants";
 
 export default function Home({ data }) {
   console.log(data);
@@ -36,12 +37,14 @@ export default function Home({ data }) {
 export async function getStaticProps() {
   try {
     const data = await loadPosts();
-    return {
-      props: {
-        data: data,
-      },
-    };
+    
   } catch (error) {
     console.log(error);
+  } finally {    
+    return {
+      props: {
+        data: posts,
+      },
+    }
   }
 }
